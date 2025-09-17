@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 // Later we’ll add these:
 import About from "./components/About";
-// import Services from "./components/Services";
+import Services from "./components/Services";
 // import Portfolio from "./components/Portfolio";
 // import Contact from "./components/Contact";
 // import Footer from "./components/Footer";
@@ -18,7 +18,7 @@ export default function App() {
       <main className="pt-20">
         <Home />
         <About />
-        {/* <Services /> */}
+        <Services />
         {/* <Portfolio /> */}
         {/* <Contact /> */}
       </main>
