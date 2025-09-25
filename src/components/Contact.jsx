@@ -4,11 +4,30 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // For now, just simulate submission
-    setStatus("Message sent successfully!");
-    setForm({ name: "", email: "", message: "" });
+    setStatus("Sending...");
+
+    try {
+      const res = await fetch("http://localhost:4000/api/contact", {
+        // 👆 change this URL to your deployed backend when live
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("✅ Message sent successfully!");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("❌ Failed to send message. Try again later.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setStatus("⚠️ Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -63,7 +82,7 @@ export default function Contact() {
             Send Message
           </button>
 
-          {status && <p className="text-green-600 text-center mt-4">{status}</p>}
+          {status && <p className="text-center mt-4">{status}</p>}
         </form>
       </div>
     </section>
