@@ -37,7 +37,8 @@ export default function Contact() {
           Contact Us
         </h2>
         <p className="mt-4 text-gray-600 text-center max-w-2xl mx-auto">
-          Have a project in mind or just want to say hello? Fill out the form below.
+          Trusted by startups and enterprises worldwide.Have a project in mind or just want to say hello? 
+          <br/>Fill out the form below.
         </p>
 
         <form

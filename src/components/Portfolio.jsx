@@ -3,16 +3,16 @@ import React from "react";
 export default function Portfolio(){
     const projects = [
         {
-        title: "Project Alpha",
-        desc: "Custom CRM solution with Salesforce integration.",
+        title: "SmartCRM – Automated Customer Relationship Management",
+        desc: "Built a custom Salesforce solution with Apex triggers, Lightning Web Components (LWC), and automation flows. Integrated lead management and payment tracking with real-time dashboards.",
         },
         {
-        title: "Project Beta",
-        desc: "E-commerce platform built with React & Node.js.",
+        title: "CloudHR – Employee & Payroll Management",
+        desc: "Developed a scalable HR platform hosted on AWS using React, Node.js, and MongoDB. Integrated role-based authentication, attendance tracking, payroll automation, and document storage using AWS S3",
         },
         {
-        title: "Project Gamma",
-        desc: "Analytics dashboard with data visualization.",
+        title: "FinBank – Secure Online Banking Portal",
+        desc: "Built a core banking system in Java (Spring Boot + Hibernate) with features like account management, fund transfers, transaction history, and security via JWT authentication.",
         },
     ]
     return(

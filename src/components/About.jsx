@@ -12,14 +12,10 @@ export default function About() {
           About Us
         </h2>
         <p className="mt-6 text-gray-600 leading-relaxed">
-          We are a passionate team of developers and consultants dedicated
-          to building high-quality software. Our mission is to help businesses
-          scale with modern solutions — from Salesforce integrations to
-          custom web applications.
+          At MegacodeiT, we are a team of skilled developers and consultants passionate about helping businesses succeed with modern technology. We specialize in Salesforce development, custom applications, and end-to-end digital solutions. With expertise across industries, we ensure every project is delivered with precision, innovation, and long-term support
         </p>
         <p className="mt-4 text-gray-600 leading-relaxed">
-          With years of experience, we ensure every project is delivered
-          with precision, innovation, and long-term support.
+          Our mission is to help businesses grow through technology-driven innovation.
         </p>
       </div>
 
