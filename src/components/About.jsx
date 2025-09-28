@@ -22,7 +22,7 @@ export default function About() {
       {/* Right: Illustration / Image */}
       <div className="flex-1 flex justify-center">
         <div className="w-72 h-72 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl shadow-md flex items-center justify-center">
-          <span className="text-gray-400">[ Illustration ]</span>
+          <img src="/logo.webp"  alt="Illustration" className="w-100 h-100 object-contain"/>
         </div>
       </div>
     </section>
