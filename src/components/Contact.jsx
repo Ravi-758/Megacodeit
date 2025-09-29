@@ -9,10 +9,14 @@ export default function Contact() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch("https://megacodeit.com/api/contact", {
+      const res = await fetch("https://megacodeit.com/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          comments: form.message, // ✅ backend expects `comments`
+        }),
       });
 
       const data = await res.json();
@@ -37,8 +41,7 @@ export default function Contact() {
         </h2>
         <p className="mt-4 text-gray-600 text-center max-w-2xl mx-auto">
           Trusted by startups and enterprises worldwide. Have a project in mind
-          or just want to say hello?
-          <br />
+          or just want to say hello? <br />
           Fill out the form below.
         </p>
 
