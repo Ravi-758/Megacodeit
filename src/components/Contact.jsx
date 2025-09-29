@@ -9,8 +9,7 @@ export default function Contact() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch("http://localhost:4000/api/contact", {
-        // 👆 change this URL to your deployed backend when live
+      const res = await fetch("https://megacodeit.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -37,8 +36,10 @@ export default function Contact() {
           Contact Us
         </h2>
         <p className="mt-4 text-gray-600 text-center max-w-2xl mx-auto">
-          Trusted by startups and enterprises worldwide.Have a project in mind or just want to say hello? 
-          <br/>Fill out the form below.
+          Trusted by startups and enterprises worldwide. Have a project in mind
+          or just want to say hello?
+          <br />
+          Fill out the form below.
         </p>
 
         <form
