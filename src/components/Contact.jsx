@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", comments: "" });
   const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -9,21 +9,18 @@ export default function Contact() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch("https://megacodeit.com/api/users", {
+      // ✅ Use relative URL (Nginx will forward to backend)
+      const res = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          comments: form.message, // ✅ backend expects `comments`
-        }),
+        body: JSON.stringify(form),
       });
 
       const data = await res.json();
 
       if (data.success) {
         setStatus("✅ Message sent successfully!");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", comments: "" });
       } else {
         setStatus("❌ Failed to send message. Try again later.");
       }
@@ -40,9 +37,8 @@ export default function Contact() {
           Contact Us
         </h2>
         <p className="mt-4 text-gray-600 text-center max-w-2xl mx-auto">
-          Trusted by startups and enterprises worldwide. Have a project in mind
-          or just want to say hello? <br />
-          Fill out the form below.
+          Trusted by startups and enterprises worldwide. Have a project in mind or just want to say hello? 
+          <br /> Fill out the form below.
         </p>
 
         <form
@@ -69,12 +65,12 @@ export default function Contact() {
             />
           </div>
 
-          {/* Message */}
+          {/* Comments */}
           <textarea
             placeholder="Your Message..."
             rows={6}
-            value={form.message}
-            onChange={(e) => setForm({ ...form, message: e.target.value })}
+            value={form.comments}
+            onChange={(e) => setForm({ ...form, comments: e.target.value })}
             required
             className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
