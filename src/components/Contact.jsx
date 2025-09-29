@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", comments: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState(null);
+
+  // Change this to your EC2 public IP or domain
+  const API_BASE = "http://3.6.226.55"; // 👉 Replace with domain later if you get one
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
 
     try {
-      // ✅ Use relative URL (Nginx will forward to backend)
-      const res = await fetch("/api/users", {
+      const res = await fetch(`${API_BASE}/api/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          comments: form.message, // ✅ backend expects "comments"
+        }),
       });
 
       const data = await res.json();
 
       if (data.success) {
         setStatus("✅ Message sent successfully!");
-        setForm({ name: "", email: "", comments: "" });
+        setForm({ name: "", email: "", message: "" });
       } else {
         setStatus("❌ Failed to send message. Try again later.");
       }
@@ -37,8 +43,9 @@ export default function Contact() {
           Contact Us
         </h2>
         <p className="mt-4 text-gray-600 text-center max-w-2xl mx-auto">
-          Trusted by startups and enterprises worldwide. Have a project in mind or just want to say hello? 
-          <br /> Fill out the form below.
+          Trusted by startups and enterprises worldwide. Have a project in mind
+          or just want to say hello? <br />
+          Fill out the form below.
         </p>
 
         <form
@@ -65,12 +72,12 @@ export default function Contact() {
             />
           </div>
 
-          {/* Comments */}
+          {/* Message */}
           <textarea
             placeholder="Your Message..."
             rows={6}
-            value={form.comments}
-            onChange={(e) => setForm({ ...form, comments: e.target.value })}
+            value={form.message}
+            onChange={(e) => setForm({ ...form, message: e.target.value })}
             required
             className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
