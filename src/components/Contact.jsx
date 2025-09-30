@@ -4,23 +4,29 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState(null);
 
-  // Change this to your EC2 public IP or domain
-  const API_BASE = "http://3.6.226.55"; // 👉 Replace with domain later if you get one
+  // For local dev: backend runs on localhost:4000
+  // For production
+const API_BASE =
+  process.env.NODE_ENV === "production"
+    ? "https://megacodeit.com" // use your domain in prod
+    : "http://127.0.0.1:4000"; // local dev
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
 
     try {
-      const res = await fetch(`${API_BASE}/api/users`, {
-        method: "POST",
+      const res = await fetch(`${API_BASE}/api/contact`, {
+      method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          comments: form.message, // ✅ backend expects "comments"
+          message: form.message,
         }),
-      });
+});
+
 
       const data = await res.json();
 
