@@ -16,7 +16,7 @@ export default function Navbar() {
           <a href="#services" className="hover:text-blue-600">Services</a>
           <a href="#portfolio" className="hover:text-blue-600">Portfolio</a>
           <a href="#contact" className="hover:text-blue-600">Contact</a>
-          <a href="#contact" className="hover:text-blue-600">Careers</a>
+          <a href="#careers" className="hover:text-blue-600">Careers</a>
           <a href="#contact" className="hover:text-blue-600">Blog</a>
         </div>
       </div>
