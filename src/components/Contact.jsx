@@ -7,10 +7,11 @@ export default function Contact() {
   const [showCareers, setShowCareers] = useState(false);
 
   // ✅ Use same domain for production, port 4000 only for local
-  const API_BASE =
-    process.env.NODE_ENV === "production"
-      ? "" // same domain (Nginx will proxy /api)
-      : "http://127.0.0.1:4000";
+const API_BASE =
+  process.env.NODE_ENV === "production"
+    ? "" // ✅ use same HTTPS domain in production
+    : "http://127.0.0.1:4000"; // only for local dev
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
