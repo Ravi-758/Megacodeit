@@ -6,29 +6,27 @@ export default function Contact() {
   const [status, setStatus] = useState(null);
   const [showCareers, setShowCareers] = useState(false);
 
-  // ✅ API Base URL — use 127.0.0.1 for local dev, your domain for prod
+  // ✅ Use same domain for production, port 4000 only for local
   const API_BASE =
     process.env.NODE_ENV === "production"
-      ? "https://megacodeit.com" // your live backend URL
-      : "http://127.0.0.1:4000"; // your local Express backend
+      ? "" // same domain (Nginx will proxy /api)
+      : "http://127.0.0.1:4000";
 
-  // ✅ Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("📨 Sending...");
 
     try {
-      console.log("📤 Sending data:", form);
-
-      const endpoint = `${API_BASE}/api/${showCareers ? "careers" : "contact"}`;
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        `${API_BASE}/api/${showCareers ? "careers" : "contact"}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
 
       const data = await res.json();
-      console.log("Server response:", data);
 
       if (data.success) {
         setStatus("✅ Message sent successfully!");
@@ -45,7 +43,6 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto px-6">
-        {/* Title */}
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center">
           {showCareers ? "Careers Form" : "Contact Us"}
         </h2>
@@ -55,7 +52,6 @@ export default function Contact() {
             : "Have a project in mind or just want to say hello? Fill out the form below."}
         </p>
 
-        {/* Toggle buttons */}
         <div className="flex justify-center mt-6">
           <div className="flex items-center bg-gray-200 rounded-full p-1">
             <button
@@ -81,7 +77,6 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Form */}
         {!showCareers ? (
           <form
             onSubmit={handleSubmit}
@@ -106,24 +101,23 @@ export default function Contact() {
                   className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-
               <div className="flex flex-col items-center gap-4 mt-4">
                 <textarea
                   placeholder="Your Message..."
                   rows={3}
                   value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
                   required
                   className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-
                 <button
                   type="submit"
                   className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
                   Send Message
                 </button>
-
                 {status && (
                   <p
                     className={`text-center mt-4 ${
